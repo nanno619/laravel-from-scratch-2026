@@ -1,75 +1,33 @@
 <?php
 
-use App\Models\Idea;
-use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\IdeaController;
 use Illuminate\Support\Facades\Route;
 
 // Index
-Route::get('/ideas', function () {
-    // 1. Generic databse query
-    // $ideas = DB::table('ideas')->get();
+Route::get('/ideas', [IdeaController::class, 'index']);
 
-    // dd($ideas);
-    // return $ideas[0]->description; // This will convert to JSON. [0] -> means we get the first item
+// Create
+Route::get('/ideas/create', [IdeaController::class, 'create']);
 
-    // 2. Eloquent
-    $ideas = Idea::all();
-
-    // return $ideas;
-
-    return view('ideas.index', [
-        'ideas' => $ideas
-    ]);
-});
+// Store
+Route::post('/ideas', [IdeaController::class, 'store']);
 
 // Show
 // Route Model Binding -
-Route::get('/ideas/{idea}', function (Idea $idea) {
-    return view('ideas.show', [
-        'idea' => $idea
-    ]);
-});
+Route::get('/ideas/{idea}', [IdeaController::class, 'show']);
 
 // Edit
 // Route Model Binding -
-Route::get('/ideas/{idea}/edit', function (Idea $idea) {
-    return view('ideas.edit', [
-        'idea' => $idea
-    ]);
-});
+Route::get('/ideas/{idea}/edit', [IdeaController::class, 'edit']);
 
 // Update
 // Route Model Binding -
-Route::patch('/ideas/{idea}', function (Idea $idea) {
-
-    $idea->update([
-        'description' => request('description'),
-    ]);
-
-    return redirect("/ideas/{$idea->id}");
-});
-
-// Store
-Route::post('/ideas', function () {
-    // dd(request()->all());
-
-    $idea = request('description');
-
-    Idea::create([
-        'description' => $idea,
-        'state' => 'pending',
-    ]);
-
-    return redirect('/ideas');
-});
+Route::patch('/ideas/{idea}', [IdeaController::class, 'update']);
 
 // Destroy
-Route::delete('/ideas/{idea}', function (Idea $idea) {
+Route::delete('/ideas/{idea}', [IdeaController::class, 'destroy']);
 
-    $idea->delete();
-
-    return redirect('/ideas');
-});
+// Route Resource
 
 
 Route::view('/about', 'about');
