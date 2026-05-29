@@ -43,6 +43,12 @@ class IdeaController extends Controller
     {
         // dd(request()->all());
 
+        $request->validate([
+            'description' => ['required', 'min:10']
+        ]);
+
+        // if we reach this point...
+
         $idea = request('description');
 
         Idea::create([
