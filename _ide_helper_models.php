@@ -1,15 +1,36 @@
 <?php
 
-namespace App\Models;
+// @formatter:off
+// phpcs:ignoreFile
+/**
+ * A helper file for your Eloquent Models
+ * Copy the phpDocs from this file to the correct Model,
+ * And remove them from this file, to prevent double declarations.
+ *
+ * @author Barry vd. Heuvel <barryvdh@gmail.com>
+ */
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Database\Factories\UserFactory;
-use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Attributes\Hidden;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
+namespace App\Models{
+/**
+ * @property int $id
+ * @property string $description
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $state
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Idea newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Idea newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Idea query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Idea whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Idea whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Idea whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Idea whereState($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Idea whereUpdatedAt($value)
+ */
+	class Idea extends \Eloquent {}
+}
+
+namespace App\Models{
 /**
  * @property int $id
  * @property string $name
@@ -33,25 +54,7 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
- * @mixin \Eloquent
  */
-#[Fillable(['name', 'email', 'password'])]
-#[Hidden(['password', 'remember_token'])]
-class User extends Authenticatable
-{
-    /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+	class User extends \Eloquent {}
 }
+

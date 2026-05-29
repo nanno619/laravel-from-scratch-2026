@@ -15,13 +15,14 @@
 
     </form>
 
-    @if (count($ideas))
+    @if ($ideas->count())
         <div class="mt-6">
             <h2 class="font-bold">Your Ideas</h2>
 
             <ul class="mt-6">
+                {{-- This is an object from collection --}}
                 @forelse ($ideas as $idea)
-                    <li class="text-sm">{{ $idea }}</li>
+                    <li class="text-sm">{{ $idea->description }}</li>
                 @empty
                     <p>No ideas</p>
                 @endforelse
